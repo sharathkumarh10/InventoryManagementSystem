@@ -32,8 +32,7 @@ public class AdminController {
 					@Content(schema=@Schema(oneOf=ErrorStructure.class))
 			})
 	})
-	@PostMapping("/admins")
-
+	@PostMapping("/register")
 	public ResponseEntity<ResponseStructure<AdminResponse>> createAdmin(@RequestBody @Valid
 			AdminRequest adminRequest){
 		return adminService.createSuperAdmin(adminRequest);
