@@ -18,4 +18,11 @@ public enum AdminType {
 		this.privileges = privileges;
 	}
 
+	public List<Privilege> getPrivileges() {
+		return privileges;
+	}
+
+	
+	
+
 }
