@@ -70,6 +70,8 @@ public class AdminServiceImpl implements AdminService {
 			adminRepo.save(admin);
 
 			wareHouse.setAdmin(admin);
+			
+			warehouseRepo.save(wareHouse);
 
 			return ResponseEntity.status(HttpStatus.CREATED)
 					.body(new ResponseStructure<AdminResponse>().setStatusCode(HttpStatus.CREATED.value())
