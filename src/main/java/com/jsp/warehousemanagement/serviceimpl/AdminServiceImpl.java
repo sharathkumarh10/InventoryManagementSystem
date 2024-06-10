@@ -17,6 +17,8 @@ import com.jsp.warehousemanagement.request.AdminRequest;
 import com.jsp.warehousemanagement.responsedto.AdminResponse;
 import com.jsp.warehousemanagement.service.AdminService;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
+
+import jakarta.validation.Valid;
 @Service
 public class AdminServiceImpl implements AdminService {
 	
@@ -39,6 +41,11 @@ public class AdminServiceImpl implements AdminService {
 				.setStatusCode(HttpStatus.CREATED.value())
 				.setMessage("User created")
 				.setData(adminMapper.mapToAdminResponse(admin)));
+	}
+	@Override
+	public ResponseEntity<ResponseStructure<AdminResponse>> createAdmin(@Valid AdminRequest adminRequest) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
