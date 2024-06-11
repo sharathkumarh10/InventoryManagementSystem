@@ -118,4 +118,30 @@ public class AdminServiceImpl implements AdminService {
 							.setMessage("Admin Updated").setData(adminMapper.mapToAdminResponse(exadmin)));
 		}).orElseThrow(() -> new AdminNotFoundByIdException("Admin not Found"));
 	}
+	
+	@Override
+	public ResponseEntity<ResponseStructure<AdminResponse>> findAdminById(int adminId) {
+		
+	return adminRepo.findById(adminId).map(admin->{
+			
+			return ResponseEntity.status(HttpStatus.FOUND)
+					.body(new ResponseStructure<AdminResponse>()
+							.setStatusCode(HttpStatus.FOUND.value())
+							.setMessage("Admin Found")
+							.setData(adminMapper.mapToAdminResponse(admin)));
+		}).orElseThrow(()-> new AdminNotFoundByIdException("Admin not found"));
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<List<AdminResponse>>> findAllAdmins() {
+		List<AdminResponse> adminsList = adminRepo.findAll().stream().map(admin -> 
+			adminMapper.mapToAdminResponse(admin)).toList();
+		
+		return ResponseEntity.status(HttpStatus.FOUND)
+				.body(new ResponseStructure<List<AdminResponse>>()
+						.setStatusCode(HttpStatus.FOUND.value())
+						.setMessage("Admins Found")
+						.setData(adminsList));
+	}
+
 }

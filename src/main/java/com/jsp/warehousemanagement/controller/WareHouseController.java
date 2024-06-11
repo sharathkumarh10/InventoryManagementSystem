@@ -45,6 +45,12 @@ public class WareHouseController {
 		return wareHouseService.updateWareHouse(wareHouseRequest,warehouseId);
 	
 	}
+	
+	@PreAuthorize("hasAuthority('READ')")
+	@GetMapping("/warehouses/{warehouseId}")
+	public ResponseEntity<ResponseStructure<WareHouseResponse>> findWarehouseById(@PathVariable int warehouseId){
+		return wareHouseService.findWarehouseById(warehouseId);
+	}
 
 }
 
