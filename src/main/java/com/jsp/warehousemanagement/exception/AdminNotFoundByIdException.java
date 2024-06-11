@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class AdminNotFoundByIdException {
+public class AdminNotFoundByIdException extends RuntimeException {
 	
 	private String message;
 
