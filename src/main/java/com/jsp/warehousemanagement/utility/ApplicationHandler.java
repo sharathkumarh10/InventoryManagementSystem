@@ -68,5 +68,23 @@ public class ApplicationHandler {
 				.body(new ErrorStructure().setStatusCode(HttpStatus.BAD_REQUEST.value())
 						.setErrorMessage("Invalid Value").setRootCause(errorList));
 	}
+	
+//	@SuppressWarnings("unchecked")
+//	@ExceptionHandler
+//	public ResponseEntity<ErrorStructure<Map<String, String>>> AdminNotFindByEmailException(AdminNotFindByEmailException exception) {
+//		List<ObjectError> allErrors = ((Errors) exception).getAllErrors();
+//
+//		Map<String, String> errorList = new HashMap<>();
+//		allErrors.forEach(error -> {
+//			FieldError fieldError = (FieldError) error;
+//			String field = fieldError.getField();
+//			String defaultMessage = fieldError.getDefaultMessage();
+//			errorList.put(field, defaultMessage);
+//		});
+//
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//				.body(new ErrorStructure().setStatusCode(HttpStatus.BAD_REQUEST.value())
+//						.setErrorMessage("Invalid Value").setRootCause(errorList));
+//	}
 
 }
