@@ -3,7 +3,7 @@ package com.jsp.warehousemanagement.mapper;
 import org.springframework.stereotype.Component;
 
 import com.jsp.warehousemanagement.entity.WareHouse;
-import com.jsp.warehousemanagement.request.WareHouseRequest;
+import com.jsp.warehousemanagement.requestdto.WareHouseRequest;
 import com.jsp.warehousemanagement.responsedto.WareHouseResponse;
 @Component
 public class WareHouseMapper {

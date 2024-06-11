@@ -51,6 +51,7 @@ public class ApplicationHandler {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@ExceptionHandler
 	public ResponseEntity<ErrorStructure<Map<String, String>>> WarehouseNotFoundByException(WarehouseNotFoundByIdException exception) {
 		List<ObjectError> allErrors = ((Errors) exception).getAllErrors();

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jsp.warehousemanagement.entity.WareHouse;
 import com.jsp.warehousemanagement.mapper.WareHouseMapper;
 import com.jsp.warehousemanagement.repository.WareHouseRepository;
-import com.jsp.warehousemanagement.request.WareHouseRequest;
+import com.jsp.warehousemanagement.requestdto.WareHouseRequest;
 import com.jsp.warehousemanagement.responsedto.WareHouseResponse;
 import com.jsp.warehousemanagement.service.WareHouseService;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
