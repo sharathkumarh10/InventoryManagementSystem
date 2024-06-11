@@ -7,12 +7,15 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.jsp.warehousemanagement.entity.Admin;
 import com.jsp.warehousemanagement.entity.WareHouse;
 import com.jsp.warehousemanagement.enums.AdminType;
 import com.jsp.warehousemanagement.enums.Privilege;
+import com.jsp.warehousemanagement.exception.AdminNotFindByEmailException;
 import com.jsp.warehousemanagement.exception.IllegalOperationException;
 import com.jsp.warehousemanagement.exception.WarehouseNotFoundByIdException;
 import com.jsp.warehousemanagement.mapper.AdminMapper;
@@ -78,6 +81,26 @@ public class AdminServiceImpl implements AdminService {
 							.setMessage("Admin created").setData(adminMapper.mapToAdminResponse(admin)));
 
 		}).orElseThrow(() -> new WarehouseNotFoundByIdException("warehouse not found"));
+
+	}
+	
+	@Override
+	public ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(@Valid AdminRequest adminRequest) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+return adminRepo.findByEmail(email).map(exAdmin->{
+	Admin admin = adminMapper.mapToAdmin(adminRequest, exAdmin);
+
+			Admin updatedAdmin = adminRepo.save(admin);
+
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseStructure<AdminResponse>()
+							.setStatusCode(HttpStatus.OK.value())
+							.setMessage("Admin Updated")
+							.setData(adminMapper.mapToAdminResponse(updatedAdmin)));
+		}).orElseThrow(()-> new AdminNotFindByEmailException("Admin not found by email"));
+		
+
 
 	}
 
