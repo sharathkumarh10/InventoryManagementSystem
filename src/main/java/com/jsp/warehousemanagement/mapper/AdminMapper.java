@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.jsp.warehousemanagement.entity.Admin;
-import com.jsp.warehousemanagement.request.AdminRequest;
+import com.jsp.warehousemanagement.requestdto.AdminRequest;
 import com.jsp.warehousemanagement.responsedto.AdminResponse;
 
 @Component

@@ -1,4 +1,4 @@
-package com.jsp.warehousemanagement.request;
+package com.jsp.warehousemanagement.requestdto;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jsp.warehousemanagement.request.AdminRequest;
+import com.jsp.warehousemanagement.requestdto.AdminRequest;
 import com.jsp.warehousemanagement.responsedto.AdminResponse;
 import com.jsp.warehousemanagement.service.AdminService;
 import com.jsp.warehousemanagement.utility.ErrorStructure;

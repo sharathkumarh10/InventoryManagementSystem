@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jsp.warehousemanagement.request.AdminRequest;
-import com.jsp.warehousemanagement.request.WareHouseRequest;
+import com.jsp.warehousemanagement.requestdto.AdminRequest;
+import com.jsp.warehousemanagement.requestdto.WareHouseRequest;
 import com.jsp.warehousemanagement.responsedto.AdminResponse;
 import com.jsp.warehousemanagement.responsedto.WareHouseResponse;
 import com.jsp.warehousemanagement.service.WareHouseService;

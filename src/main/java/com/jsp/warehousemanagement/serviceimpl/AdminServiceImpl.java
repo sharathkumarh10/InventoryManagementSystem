@@ -18,7 +18,7 @@ import com.jsp.warehousemanagement.exception.WarehouseNotFoundByIdException;
 import com.jsp.warehousemanagement.mapper.AdminMapper;
 import com.jsp.warehousemanagement.repository.AdminRepository;
 import com.jsp.warehousemanagement.repository.WareHouseRepository;
-import com.jsp.warehousemanagement.request.AdminRequest;
+import com.jsp.warehousemanagement.requestdto.AdminRequest;
 import com.jsp.warehousemanagement.responsedto.AdminResponse;
 import com.jsp.warehousemanagement.service.AdminService;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
