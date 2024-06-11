@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,8 @@ public class WareHouse {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int warehouseId;
 	private String name;
-	@Autowired
+	
+	@OneToOne
 	private Admin admin;
 
 }

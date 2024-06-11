@@ -6,9 +6,12 @@ import com.jsp.warehousemanagement.request.WareHouseRequest;
 import com.jsp.warehousemanagement.responsedto.WareHouseResponse;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
 
+import jakarta.validation.Valid;
+
 public interface WareHouseService {
+
+	ResponseEntity<ResponseStructure<WareHouseResponse>> createWareHouse(@Valid WareHouseRequest wareHouseRequest);
 	
-	public ResponseEntity<ResponseStructure<WareHouseResponse>> createSuperAdmin(
-			WareHouseRequest wareHouseRequest);
+	
 
 }
