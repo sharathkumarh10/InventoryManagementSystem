@@ -40,7 +40,7 @@ public class WareHouseController {
 	}
 	@PreAuthorize("hasAuthority('UPDATE_WAREHOUSE')")
 	@PutMapping("/warehouses/{warehouseId}")
-	public ResponseEntity<ResponseStructure<WareHouseResponse>> createWareHouse(@RequestBody @Valid
+	public ResponseEntity<ResponseStructure<WareHouseResponse>> updateWareHouse(@RequestBody @Valid
 			WareHouseRequest wareHouseRequest,@PathVariable int warehouseId){
 		return wareHouseService.updateWareHouse(wareHouseRequest,warehouseId);
 	

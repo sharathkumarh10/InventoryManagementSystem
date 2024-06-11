@@ -16,6 +16,7 @@ import com.jsp.warehousemanagement.entity.WareHouse;
 import com.jsp.warehousemanagement.enums.AdminType;
 import com.jsp.warehousemanagement.enums.Privilege;
 import com.jsp.warehousemanagement.exception.AdminNotFindByEmailException;
+import com.jsp.warehousemanagement.exception.AdminNotFoundByIdException;
 import com.jsp.warehousemanagement.exception.IllegalOperationException;
 import com.jsp.warehousemanagement.exception.WarehouseNotFoundByIdException;
 import com.jsp.warehousemanagement.mapper.AdminMapper;
@@ -24,12 +25,17 @@ import com.jsp.warehousemanagement.repository.WareHouseRepository;
 import com.jsp.warehousemanagement.requestdto.AdminRequest;
 import com.jsp.warehousemanagement.responsedto.AdminResponse;
 import com.jsp.warehousemanagement.service.AdminService;
+import com.jsp.warehousemanagement.serviceimpl.AdminServiceImpl.AdminNotFindByIdException;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
 
 import jakarta.validation.Valid;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+
+	public class AdminNotFindByIdException {
+
+	}
 
 	@Autowired
 	private AdminRepository adminRepo;
@@ -73,7 +79,7 @@ public class AdminServiceImpl implements AdminService {
 			adminRepo.save(admin);
 
 			wareHouse.setAdmin(admin);
-			
+
 			warehouseRepo.save(wareHouse);
 
 			return ResponseEntity.status(HttpStatus.CREATED)
@@ -83,25 +89,33 @@ public class AdminServiceImpl implements AdminService {
 		}).orElseThrow(() -> new WarehouseNotFoundByIdException("warehouse not found"));
 
 	}
-	
+
 	@Override
 	public ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(@Valid AdminRequest adminRequest) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String email = authentication.getName();
-return adminRepo.findByEmail(email).map(exAdmin->{
-	Admin admin = adminMapper.mapToAdmin(adminRequest, exAdmin);
+		return adminRepo.findByEmail(email).map(exAdmin -> {
+			Admin admin = adminMapper.mapToAdmin(adminRequest, exAdmin);
 
 			Admin updatedAdmin = adminRepo.save(admin);
 
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(new ResponseStructure<AdminResponse>()
-							.setStatusCode(HttpStatus.OK.value())
-							.setMessage("Admin Updated")
-							.setData(adminMapper.mapToAdminResponse(updatedAdmin)));
-		}).orElseThrow(()-> new AdminNotFindByEmailException("Admin not found by email"));
-		
-
+					.body(new ResponseStructure<AdminResponse>().setStatusCode(HttpStatus.OK.value())
+							.setMessage("Admin Updated").setData(adminMapper.mapToAdminResponse(updatedAdmin)));
+		}).orElseThrow(() -> new AdminNotFindByEmailException("Admin not found by email"));
 
 	}
 
+	// TODO Auto-generated method stub
+	@Override
+	public ResponseEntity<ResponseStructure<AdminResponse>> updateAdminBySuperAdmin(AdminRequest adminRequest,
+			int adminId) {
+		return adminRepo.findById(adminId).map(exadmin -> {
+			adminMapper.mapToAdmin(adminRequest, exadmin);
+			exadmin = adminRepo.save(exadmin);
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseStructure<AdminResponse>().setStatusCode(HttpStatus.OK.value())
+							.setMessage("Admin Updated").setData(adminMapper.mapToAdminResponse(exadmin)));
+		}).orElseThrow(() -> new AdminNotFoundByIdException("Admin not Found"));
+	}
 }
