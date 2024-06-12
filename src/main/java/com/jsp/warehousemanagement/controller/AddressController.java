@@ -3,6 +3,7 @@ package com.jsp.warehousemanagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,11 +33,17 @@ public class AddressController {
 
 	}
 	
-	@PreAuthorize("hasAuthority('UPDATE_WAREHOUSE')")
+	@PreAuthorize("hasAuthority('UPDATE_ADDRESS')")
 	@PutMapping("/addresses/{addressId}")
 	public ResponseEntity<ResponseStructure<AddressResponse>> updateAddress(@RequestBody @Valid
 			AddressRequest addressRequest,@PathVariable int addressId){
 		return addressService.updateAddress(addressRequest,addressId);
 	
+	}
+	
+	@PreAuthorize("hasAuthority('READ')")
+	@GetMapping("/address/{addressId}")
+	public ResponseEntity<ResponseStructure<AddressResponse>> findWarehouseById(@PathVariable int addressId){
+		return addressService.findAddressById(addressId);
 	}
 }
