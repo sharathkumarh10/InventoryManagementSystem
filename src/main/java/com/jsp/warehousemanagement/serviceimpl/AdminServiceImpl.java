@@ -144,4 +144,17 @@ public class AdminServiceImpl implements AdminService {
 						.setData(adminsList));
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<List<AdminResponse>>> findAllByAdmins(AdminType adminType) {
+		// TODO Auto-generated method stub
+		List<AdminResponse> adminsList = adminRepo.findAllByAdminType(AdminType.ADMIN).stream()
+				.map(adminMapper::mapToAdminResponse).toList();
+	
+	return ResponseEntity.status(HttpStatus.FOUND)
+			.body(new ResponseStructure<List<AdminResponse>>()
+					.setStatusCode(HttpStatus.FOUND.value())
+					.setMessage("Admins Found")
+					.setData(adminsList));
+	}
+
 }

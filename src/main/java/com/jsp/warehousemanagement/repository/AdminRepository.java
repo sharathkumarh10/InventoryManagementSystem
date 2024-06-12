@@ -1,5 +1,6 @@
 package com.jsp.warehousemanagement.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,7 @@ public interface AdminRepository extends JpaRepository<Admin,Integer > {
 
 	public Optional<Admin> findByEmail(String username);
 	
+	public List<Admin> findAllByAdminType(AdminType adminType);
 	
 
 }

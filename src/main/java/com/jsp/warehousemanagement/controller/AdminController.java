@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jsp.warehousemanagement.enums.AdminType;
 import com.jsp.warehousemanagement.requestdto.AdminRequest;
 import com.jsp.warehousemanagement.responsedto.AdminResponse;
 import com.jsp.warehousemanagement.service.AdminService;
@@ -73,8 +74,8 @@ public class AdminController {
 
 	@PreAuthorize("hasAuthority('READ')")
 	@GetMapping("/admins")
-	public ResponseEntity<ResponseStructure<List<AdminResponse>>> findAllAdmins() {
-		return adminService.findAllAdmins();
+	public ResponseEntity<ResponseStructure<List<AdminResponse>>> findAllByAdminType( AdminType adminType) {
+		return adminService.findAllByAdmins(adminType);
 
 	}
 }
