@@ -22,6 +22,7 @@ import com.jsp.warehousemanagement.service.AddressService;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
 
 import jakarta.validation.Valid;
+
 @Service
 public class AddressServiceImpl implements AddressService {
 	@Autowired
@@ -37,10 +38,9 @@ public class AddressServiceImpl implements AddressService {
 		// TODO Auto-generated method stub
 		return warehouseRepo.findById(warehouseId).map(wareHouse -> {
 			Address address = addressMapper.mapToAddress(addressRequest, new Address());
-			
-			address.setWareHouse(wareHouse);
-			address=addressRepo.save(address);
 
+			address.setWareHouse(wareHouse);
+			address = addressRepo.save(address);
 
 			return ResponseEntity.status(HttpStatus.CREATED)
 					.body(new ResponseStructure<AddressResponse>().setStatusCode(HttpStatus.CREATED.value())
@@ -53,19 +53,26 @@ public class AddressServiceImpl implements AddressService {
 	public ResponseEntity<ResponseStructure<AddressResponse>> updateAddress(@Valid AddressRequest addressRequest,
 			int addressId) {
 		// TODO Auto-generated method stub
-		return	addressRepo.findById(addressId)
-				.<ResponseEntity<ResponseStructure<AddressResponse>>>map(exAddress -> {
+		return addressRepo.findById(addressId).<ResponseEntity<ResponseStructure<AddressResponse>>>map(exAddress -> {
 
 			exAddress = addressMapper.mapToAddress(addressRequest, exAddress);
 
 			Address address = addressRepo.save(exAddress);
 
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(new ResponseStructure<AddressResponse>()
-							.setStatusCode(HttpStatus.OK.value())
-							.setMessage("address Updated")
-							.setData(addressMapper.mapToAddressResponse(address)));
-		}).orElseThrow(()-> new AddressNotFoundByIdException("Addres Not Found By id"));
+					.body(new ResponseStructure<AddressResponse>().setStatusCode(HttpStatus.OK.value())
+							.setMessage("address Updated").setData(addressMapper.mapToAddressResponse(address)));
+		}).orElseThrow(() -> new AddressNotFoundByIdException("Addres Not Found By id"));
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<AddressResponse>> findAddressById(int addressId) {
+		// TODO Auto-generated method stub
+		return addressRepo.findById(addressId).<ResponseEntity<ResponseStructure<AddressResponse>>>map(address -> {
+
+			return ResponseEntity.status(HttpStatus.FOUND)
+					.body(new ResponseStructure<AddressResponse>().setStatusCode(HttpStatus.FOUND.value())
+							.setMessage("Address find").setData(addressMapper.mapToAddressResponse(address)));
+		}).orElseThrow(() -> new AddressNotFoundByIdException("Address not found by Id"));
+	}
 }
