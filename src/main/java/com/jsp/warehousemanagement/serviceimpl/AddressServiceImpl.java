@@ -8,14 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.jsp.warehousemanagement.entity.Address;
 import com.jsp.warehousemanagement.entity.Admin;
+import com.jsp.warehousemanagement.entity.WareHouse;
 import com.jsp.warehousemanagement.enums.AdminType;
+import com.jsp.warehousemanagement.exception.AddressNotFoundByIdException;
 import com.jsp.warehousemanagement.exception.WarehouseNotFoundByIdException;
 import com.jsp.warehousemanagement.mapper.AddressMapper;
 import com.jsp.warehousemanagement.repository.AddressRepo;
 import com.jsp.warehousemanagement.repository.WareHouseRepository;
 import com.jsp.warehousemanagement.requestdto.AddressRequest;
 import com.jsp.warehousemanagement.responsedto.AddressResponse;
-
+import com.jsp.warehousemanagement.responsedto.WareHouseResponse;
 import com.jsp.warehousemanagement.service.AddressService;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
 
@@ -45,6 +47,25 @@ public class AddressServiceImpl implements AddressService {
 							.setMessage("Addres created").setData(addressMapper.mapToAddressResponse(address)));
 
 		}).orElseThrow(() -> new WarehouseNotFoundByIdException("warehouse not found"));
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<AddressResponse>> updateAddress(@Valid AddressRequest addressRequest,
+			int addressId) {
+		// TODO Auto-generated method stub
+		return	addressRepo.findById(addressId)
+				.<ResponseEntity<ResponseStructure<AddressResponse>>>map(exAddress -> {
+
+			exAddress = addressMapper.mapToAddress(addressRequest, exAddress);
+
+			Address address = addressRepo.save(exAddress);
+
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseStructure<AddressResponse>()
+							.setStatusCode(HttpStatus.OK.value())
+							.setMessage("address Updated")
+							.setData(addressMapper.mapToAddressResponse(address)));
+		}).orElseThrow(()-> new AddressNotFoundByIdException("Addres Not Found By id"));
 	}
 
 }
