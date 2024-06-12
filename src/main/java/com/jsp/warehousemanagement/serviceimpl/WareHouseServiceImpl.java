@@ -15,7 +15,7 @@ import com.jsp.warehousemanagement.requestdto.WareHouseRequest;
 import com.jsp.warehousemanagement.responsedto.AdminResponse;
 import com.jsp.warehousemanagement.responsedto.WareHouseResponse;
 import com.jsp.warehousemanagement.service.WareHouseService;
-import com.jsp.warehousemanagement.serviceimpl.WareHouseServiceImpl.WareHouseNotFoundByIdException;
+
 import com.jsp.warehousemanagement.utility.ResponseStructure;
 
 import jakarta.validation.Valid;
@@ -25,9 +25,7 @@ import jakarta.validation.Valid;
 @Service
 public class WareHouseServiceImpl implements WareHouseService {
 
-	public class WareHouseNotFoundByIdException {
-
-	}
+	
 
 	@Autowired
 	private WareHouseRepository wareHouseRepository;
