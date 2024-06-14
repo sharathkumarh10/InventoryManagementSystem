@@ -1,5 +1,7 @@
 package com.jsp.warehousemanagement.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,23 +47,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 					.setData(wareHouseMapper.mapToWareHouseResponse(wareHouse)));
 	}
 
-	@Override
-//	public ResponseEntity<ResponseStructure<WareHouseResponse>> updateWareHouse(
-//			@Valid WareHouseRequest wareHouseRequest, int warehouseId) {
-//		// TODO Auto-generated method stub
-//		return wareHouseRepository.findById(warehouseId).map(exWareHouse->{
-//			WareHouse wh = wareHouseMapper.mapToWareHouse(wareHouseRequest, exWareHouse);
-//
-//					WareHouse updatedn = wareHouseRepository.save(wh);
-//
-//					return ResponseEntity.status(HttpStatus.OK)
-//							.body(new ResponseStructure<AdminResponse>()
-//									.setStatusCode(HttpStatus.OK.value())
-//									.setMessage("WareHouse Updated")
-//									.setData(adminMapper.mapToAdminResponse(updatedAdmin)));
-//				}).orElseThrow(()-> new WareHouseNotFoundByIdException("WareHouse not found"));
-//				
-//	}
+
 	
 	public ResponseEntity<ResponseStructure<WareHouseResponse>> updateWareHouse(
 	        @Valid WareHouseRequest wareHouseRequest, int warehouseId) {
@@ -93,7 +79,28 @@ public class WareHouseServiceImpl implements WareHouseService {
 							.setData(wareHouseMapper.mapToWareHouseResponse(warehouse)));
 		}).orElseThrow(()-> new WarehouseNotFoundByIdException("Warehouse not found by Id"));
 	}
+
+
+
+	@Override
+	public ResponseEntity<ResponseStructure<List<WareHouseResponse>>> findAllWareHouses() {
+		// TODO Auto-generated method stub
+		List<WareHouseResponse> wareHouseList = wareHouseRepository.findAll().stream().map(wareHouse -> 
+		wareHouseMapper.mapToWareHouseResponse(wareHouse)).toList();
+	
+	return ResponseEntity.status(HttpStatus.FOUND)
+			.body(new ResponseStructure<List<WareHouseResponse>>()
+					.setStatusCode(HttpStatus.FOUND.value())
+					.setMessage("WareHouses Found")
+					.setData(wareHouseList));
+	}
+	
+	
 }
+
+
+
+	
 
 
 
