@@ -1,6 +1,6 @@
 package com.jsp.warehousemanagement.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +18,8 @@ public class WareHouse {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int warehouseId;
 	private String name;
+	private double totalCapacity;
+
 	
 	@OneToOne
 	private Admin admin;

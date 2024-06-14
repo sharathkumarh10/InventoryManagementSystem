@@ -1,3 +1,4 @@
+
 package com.jsp.warehousemanagement.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;

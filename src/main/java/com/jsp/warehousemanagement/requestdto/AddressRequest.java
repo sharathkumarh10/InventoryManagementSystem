@@ -12,14 +12,14 @@ public class AddressRequest {
 	@NotNull(message = "AddressLine cannot be null")
 	@NotBlank(message = "AddressLine cannot be blank")
 	private String addressLine;
-	@NotNull(message = "AddressLine cannot be null")
-	@NotBlank(message = "AddressLine cannot be blank")
+	@NotNull(message = "City cannot be null")
+	@NotBlank(message = "City cannot be blank")
 	private String city;
-	@NotNull(message = "AddressLine cannot be null")
-	@NotBlank(message = "AddressLine cannot be blank")
+	@NotNull(message = "State cannot be null")
+	@NotBlank(message = "State cannot be blank")
 	private String state;
-	@NotNull(message = "AddressLine cannot be null")
-	@NotBlank(message = "AddressLine cannot be blank")
+	@NotNull(message = "Country cannot be null")
+	@NotBlank(message = "Country cannot be blank")
 	private String country;
 	
 	private int pincode;
