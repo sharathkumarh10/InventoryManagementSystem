@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.jsp.warehousemanagement.enums.MaterialType;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -24,6 +26,7 @@ public class StorageRequest {
 	private double breadthInMetres;
 	private double heightInMetres;
 	private double capacityInkg;
+	
 	private List<MaterialType> materialTypes;
 
 	

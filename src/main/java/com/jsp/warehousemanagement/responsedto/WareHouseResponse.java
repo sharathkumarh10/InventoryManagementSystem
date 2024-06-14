@@ -1,5 +1,7 @@
 package com.jsp.warehousemanagement.responsedto;
 
+import com.jsp.warehousemanagement.entity.Address;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +15,9 @@ public class WareHouseResponse {
 	
 	private int warehouseId;
 	private String name;
-	private int totalCapacity;
+	private double totalCapacity;
+	
+	private AddressResponse addressResponse;
 
+	
 }
