@@ -37,6 +37,7 @@ public class WareHouseController {
 	@PreAuthorize("hasAuthority('CREATE_WAREHOUSE')")
 	@PostMapping("/warehouses")
 	public ResponseEntity<ResponseStructure<WareHouseResponse>> createWareHouse(@RequestBody @Valid
+
 			WareHouseRequest wareHouseRequest){
 		return wareHouseService.createWareHouse(wareHouseRequest);
 	}
