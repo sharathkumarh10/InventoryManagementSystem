@@ -43,7 +43,8 @@ public class AdminController {
 			@RequestBody @Valid AdminRequest adminRequest) {
 		return adminService.createSuperAdmin(adminRequest);
 	}
-
+	
+	
 	@PostMapping("/warehouses/{warehouseId}/admins")
 	public ResponseEntity<ResponseStructure<AdminResponse>> createAdmin(@RequestBody @Valid AdminRequest adminRequest,
 			@PathVariable int warehouseId) {
