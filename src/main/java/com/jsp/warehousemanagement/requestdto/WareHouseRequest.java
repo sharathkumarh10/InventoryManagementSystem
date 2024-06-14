@@ -1,4 +1,4 @@
-package com.jsp.warehousemanagement.request;
+package com.jsp.warehousemanagement.requestdto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,5 +11,6 @@ public class WareHouseRequest {
 	@NotBlank(message = "Warehousename cannot be blank")
 	private String name;
 	
+	private int totalCapacity;
 
 }

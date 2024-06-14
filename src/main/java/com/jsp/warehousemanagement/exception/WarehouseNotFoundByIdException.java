@@ -3,9 +3,9 @@ package com.jsp.warehousemanagement.exception;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
-public class AdminNotFoundByIdException extends RuntimeException {
+@AllArgsConstructor
+public class WarehouseNotFoundByIdException extends RuntimeException {
 	
 	private String message;
 

@@ -5,8 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class AdminNotFoundByIdException extends RuntimeException {
+public class AdminNotFindByEmailException extends RuntimeException {
 	
 	private String message;
+	
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.jsp.warehousemanagement.exception.IllegalOperationException;
+import com.jsp.warehousemanagement.exception.WarehouseNotFoundByIdException;
 
 @RestControllerAdvice
 public class ApplicationHandler {
@@ -47,5 +49,42 @@ public class ApplicationHandler {
 				.body(new ErrorStructure().setStatusCode(HttpStatus.BAD_REQUEST.value())
 						.setErrorMessage("Invalid Value").setRootCause(errorList));
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure<Map<String, String>>> WarehouseNotFoundByException(WarehouseNotFoundByIdException exception) {
+		List<ObjectError> allErrors = ((Errors) exception).getAllErrors();
+
+		Map<String, String> errorList = new HashMap<>();
+		allErrors.forEach(error -> {
+			FieldError fieldError = (FieldError) error;
+			String field = fieldError.getField();
+			String defaultMessage = fieldError.getDefaultMessage();
+			errorList.put(field, defaultMessage);
+		});
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(new ErrorStructure().setStatusCode(HttpStatus.BAD_REQUEST.value())
+						.setErrorMessage("Invalid Value").setRootCause(errorList));
+	}
+	
+//	@SuppressWarnings("unchecked")
+//	@ExceptionHandler
+//	public ResponseEntity<ErrorStructure<Map<String, String>>> AdminNotFindByEmailException(AdminNotFindByEmailException exception) {
+//		List<ObjectError> allErrors = ((Errors) exception).getAllErrors();
+//
+//		Map<String, String> errorList = new HashMap<>();
+//		allErrors.forEach(error -> {
+//			FieldError fieldError = (FieldError) error;
+//			String field = fieldError.getField();
+//			String defaultMessage = fieldError.getDefaultMessage();
+//			errorList.put(field, defaultMessage);
+//		});
+//
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//				.body(new ErrorStructure().setStatusCode(HttpStatus.BAD_REQUEST.value())
+//						.setErrorMessage("Invalid Value").setRootCause(errorList));
+//	}
 
 }

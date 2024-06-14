@@ -1,7 +1,5 @@
 package com.jsp.warehousemanagement.entity;
 
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,17 +9,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
 @Setter
-public class WareHouse {
+@Getter
+public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int warehouseId;
-	private String name;
-	private double totalCapacity;
-
+	private int addressId;
+	private String addressLine;
+	private String city;
+	private String state;
+	private String country;
+	private int pincode;
+	private String longitude;
+	private String latitude;
 	
 	@OneToOne
-	private Admin admin;
+	private WareHouse wareHouse;
+	
+	
 
 }
