@@ -95,4 +95,16 @@ public class StorageServiceImpl implements StorageService {
 		}).orElseThrow(()-> new StorageNotFoundByIdException("storage Not Found"));
 	}
 
+
+
+//	@Override
+//	public ResponseEntity<ResponseStructure<StorageResponse>> findByCapacityAndLengthAndBreadthAndHeight(
+//			double capacityInkg, double lengthInMetres, double breadthInMetres, double heightInMetres) {
+//		// TODO Auto-generated method stub
+//		return storageRepository.findByCapacityInkgAndLengthInMetresAndBreadthInMetresAndHeightInMetres(capacityInkg, 
+//				lengthInMetres, breadthInMetres, heightInMetres).map(storage->{
+//					
+//				})
+//	}
+
 }
