@@ -1,8 +1,11 @@
 package com.jsp.warehousemanagement.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jsp.warehousemanagement.entity.Storage;
+import com.jsp.warehousemanagement.repository.StorageRepository;
 import com.jsp.warehousemanagement.requestdto.StorageRequest;
 import com.jsp.warehousemanagement.responsedto.StorageResponse;
 import com.jsp.warehousemanagement.service.StorageService;
@@ -22,8 +27,11 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v2")
 public class StorageController {
 	
-	@Autowired
+	@Autowired 
 	private StorageService storageService;
+	
+	@Autowired
+	private StorageRepository storageRepo;
 	@PreAuthorize("hasAuthority('READ')")
 	@PostMapping("/warehouses/{warehouseId}/storages")
 	public ResponseEntity<SimpleStructure<String>>createStorage(@RequestBody @Valid StorageRequest storageRequest,
@@ -37,5 +45,12 @@ public class StorageController {
 	
 		return storageService.updateStorage(storageId, storageRequest);
 	}
+	
+//	@GetMapping("/storages")
+//	public Optional<Storage> findByCapacityInkgAndLengthInMetresAndBreadthInMetresAndHeightInMetres(@RequestParam double capacityInkg,double lengthInMetres,double breadthInMetres,double heightInMetres){
+//		
+//		return storageRepo.findByCapacityInkgAndLengthInMetresAndBreadthInMetresAndHeightInMetres(capacityInkg,lengthInMetres,breadthInMetres,heightInMetres);
+//			
+//	}
 
 }
