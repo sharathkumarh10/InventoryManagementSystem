@@ -11,9 +11,9 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @Builder
-public class ClientResponse {
+public class ApiKeyResponse {
 
 	private String apiKey;
-	private String message;
+	
 
 }
