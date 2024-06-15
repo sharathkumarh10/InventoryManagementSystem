@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.jsp.warehousemanagement.entity.Client;
 import com.jsp.warehousemanagement.requestdto.ClientRequest;
-import com.jsp.warehousemanagement.responsedto.ClientResponse;
+import com.jsp.warehousemanagement.responsedto.ApiKeyResponse;
 @Component
 public class ClientMapper {
 	
@@ -16,11 +16,10 @@ public class ClientMapper {
 		return client;
 	}
 
-	public ClientResponse mapToClientResponse(Client client) {
-		return ClientResponse.builder()
+	public ApiKeyResponse mapToClientResponse(Client client) {
+		return ApiKeyResponse.builder()
 				
 				.apiKey(client.getApiKey())
-				.message("apikey created")
 				.build();
 	}
 }

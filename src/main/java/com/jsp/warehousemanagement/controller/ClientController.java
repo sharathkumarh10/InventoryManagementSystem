@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jsp.warehousemanagement.requestdto.ClientRequest;
 
-import com.jsp.warehousemanagement.responsedto.ClientResponse;
+import com.jsp.warehousemanagement.responsedto.ApiKeyResponse;
 
 import com.jsp.warehousemanagement.service.ClientService;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
@@ -26,14 +26,14 @@ public class ClientController {
 	private ClientService clientService;
 	
 	@PostMapping("/clients")
-	public ResponseEntity<ResponseStructure<ClientResponse>> registerClient(@RequestBody @Valid
+	public ResponseEntity<ResponseStructure<ApiKeyResponse>> registerClient(@RequestBody @Valid
 
 			ClientRequest clientRequest){
 		return clientService.registerClient(clientRequest);
 	}
 	
 	@PutMapping("/clients/{clientId}")
-	public ResponseEntity<ResponseStructure<ClientResponse>> updateClient(@RequestBody @Valid
+	public ResponseEntity<ResponseStructure<ApiKeyResponse>> updateClient(@RequestBody @Valid
 
 			ClientRequest clientRequest,@PathVariable int clientId){
 		return clientService.updateClient(clientRequest,clientId);
