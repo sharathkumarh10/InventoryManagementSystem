@@ -8,10 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.jsp.warehousemanagement.entity.Client;
+import com.jsp.warehousemanagement.entity.WareHouse;
+import com.jsp.warehousemanagement.exception.ClientNotFoundByIdException;
+import com.jsp.warehousemanagement.exception.WarehouseNotFoundByIdException;
 import com.jsp.warehousemanagement.mapper.ClientMapper;
 import com.jsp.warehousemanagement.repository.ClientRepository;
 import com.jsp.warehousemanagement.requestdto.ClientRequest;
 import com.jsp.warehousemanagement.responsedto.ClientResponse;
+import com.jsp.warehousemanagement.responsedto.WareHouseResponse;
 import com.jsp.warehousemanagement.service.ClientService;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
 
@@ -40,5 +44,22 @@ public class ClientServiceImpl implements ClientService {
 				.body(new ResponseStructure<ClientResponse>().setStatusCode(HttpStatus.CREATED.value())
 						.setMessage("Client Created").setData(clientMapper.mapToClientResponse(client)));
 
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<ClientResponse>> updateClient(@Valid ClientRequest clientRequest,
+			int clientId) {
+		return clientRepository.findById(clientId).<ResponseEntity<ResponseStructure<ClientResponse>>>map(exClient -> {
+
+			exClient = clientMapper.mapToClient(clientRequest, exClient);
+
+			Client client = clientRepository.save(exClient);
+
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseStructure<ClientResponse>()
+							.setStatusCode(HttpStatus.OK.value())
+							.setMessage("Client Details Updated")
+							.setData(clientMapper.mapToClientResponse(client)));
+		}).orElseThrow(()-> new ClientNotFoundByIdException("Client Not Found"));
 	}
 }

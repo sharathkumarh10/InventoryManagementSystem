@@ -1,9 +1,6 @@
 package com.jsp.warehousemanagement.entity;
 
-import java.util.List;
-
 import com.jsp.warehousemanagement.enums.AdminType;
-import com.jsp.warehousemanagement.enums.Privilege;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

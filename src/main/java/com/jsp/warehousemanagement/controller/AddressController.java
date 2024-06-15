@@ -43,7 +43,7 @@ public class AddressController {
 	
 	@PreAuthorize("hasAuthority('READ')")
 	@GetMapping("/address/{addressId}")
-	public ResponseEntity<ResponseStructure<AddressResponse>> findWarehouseById(@PathVariable int addressId){
+	public ResponseEntity<ResponseStructure<AddressResponse>> findAddressById(@PathVariable int addressId){
 		return addressService.findAddressById(addressId);
 	}
 }
