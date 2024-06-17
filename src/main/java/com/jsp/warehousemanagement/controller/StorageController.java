@@ -30,13 +30,12 @@ public class StorageController {
 	@Autowired 
 	private StorageService storageService;
 	
-	@Autowired
-	private StorageRepository storageRepo;
+	
 	@PreAuthorize("hasAuthority('READ')")
-	@PostMapping("/warehouses/{warehouseId}/storages")
+	@PostMapping("/warehouses/{warehouseId}/storages/{storageTypeId}")
 	public ResponseEntity<SimpleStructure<String>>createStorage(@RequestBody @Valid StorageRequest storageRequest,
-			@PathVariable int warehouseId ,@RequestParam ("no_of_storage_units") int noOfStorageUnits){
-		return storageService.createStorage(storageRequest,warehouseId,noOfStorageUnits);
+			@PathVariable int warehouseId ,@RequestParam ("no_of_storage_units") int noOfStorageUnits,@PathVariable int storageTypeId){
+		return storageService.createStorage(storageRequest,warehouseId,noOfStorageUnits,storageTypeId);
 	}
 	
 	@PreAuthorize("hasAuthority('UPDATE_STORAGE')")
