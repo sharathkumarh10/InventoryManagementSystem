@@ -13,7 +13,7 @@ import jakarta.validation.Valid;
 public interface StorageService {
 
 	ResponseEntity<SimpleStructure<String>> createStorage(@Valid StorageRequest storageRequest, int warehouseId,
-			int noOfStorageUnits);
+			int noOfStorageUnits,int storagetypeId);
 
 	ResponseEntity<ResponseStructure<StorageResponse>> updateStorage(int storageId, StorageRequest storageRequest);
 

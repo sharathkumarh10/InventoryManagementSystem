@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 @Entity
@@ -22,17 +23,17 @@ public class Storage {
 	private int storageId;
 	private String blockName;
 	private String section;
-	private double lengthInMetres;
-	private double breadthInMetres;
-	private double heightInMetres;
-	private double capacityInkg;
 	private double maxAdditionalWeightInKg;
 	private double availableAreaInMetre;
 	@Enumerated(EnumType.STRING)
 	private List<MaterialType>materialType;
+	private int sellerId;
 	
 	@ManyToOne
 	private WareHouse wareHouse;
+
+	@ManyToOne
+	private StorageType storageTypes;
 	
 	
 }
