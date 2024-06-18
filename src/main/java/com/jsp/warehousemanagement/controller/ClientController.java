@@ -15,8 +15,13 @@ import com.jsp.warehousemanagement.requestdto.ClientRequest;
 import com.jsp.warehousemanagement.responsedto.ApiKeyResponse;
 
 import com.jsp.warehousemanagement.service.ClientService;
+import com.jsp.warehousemanagement.utility.ErrorStructure;
 import com.jsp.warehousemanagement.utility.ResponseStructure;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/v2")
@@ -25,14 +30,19 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 	
-	@PostMapping("/clients")
+	@Operation(description = "the endpoint for registering the client to database", responses = {
+			@ApiResponse(responseCode = "201", description = "client registered"),
+			@ApiResponse(responseCode = "400", description = "client already registered", content = {
+					@Content(schema = @Schema(oneOf = ErrorStructure.class)) }) })
+	
+	@PostMapping("/client/register")
 	public ResponseEntity<ResponseStructure<ApiKeyResponse>> registerClient(@RequestBody @Valid
 
 			ClientRequest clientRequest){
 		return clientService.registerClient(clientRequest);
 	}
 	
-	@PutMapping("/clients/{clientId}")
+	@PutMapping("/client/{clientId}/clients")
 	public ResponseEntity<ResponseStructure<ApiKeyResponse>> updateClient(@RequestBody @Valid
 
 			ClientRequest clientRequest,@PathVariable int clientId){
