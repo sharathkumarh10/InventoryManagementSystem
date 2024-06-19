@@ -68,7 +68,8 @@ public class StorageServiceImpl implements StorageService {
 			storage.setMaxAdditionalWeightInKg(storageType.getCapacityInkg());
 			
 			
-			storage.setAvailableAreaInMetre(storageType.getLengthInMetres() * storageType.getBreadthInMetres() * storageType.getHeightInMetres());
+			storage.setAvailableAreaInMetre(storageType.getLengthInMetres() 
+					* storageType.getBreadthInMetres() * storageType.getHeightInMetres());
 			
 			wareHouse.setTotalCapacity(storageType.getCapacityInkg() * noOfStorageUnits +  wareHouse.getTotalCapacity());
 			storage.setWareHouse(wareHouse);
@@ -100,7 +101,7 @@ public class StorageServiceImpl implements StorageService {
 		return storageRepository.findById(storageId).map(existingStorage -> {
 			
 			existingStorage = storageMapper.mapToStorage(storageRequest, existingStorage);
-			existingStorage.setAvailableAreaInMetre(storageRequest.getLengthInMetres() * storageRequest.getBreadthInMetres() * storageRequest.getHeightInMetres());
+//			existingStorage.setAvailableAreaInMetre(storageType.getLengthInMetres() * storageRequest.getBreadthInMetres() * storageRequest.getHeightInMetres());
 			storageRepository.save(existingStorage);
 			
 			return ResponseEntity.status(HttpStatus.OK).body(new ResponseStructure<StorageResponse>()

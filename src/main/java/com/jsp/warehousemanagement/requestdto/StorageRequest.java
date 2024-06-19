@@ -22,10 +22,7 @@ public class StorageRequest {
 	@NotBlank(message = "Section"
 			+ " cannot be blank")
 	private String section;
-	private double lengthInMetres;
-	private double breadthInMetres;
-	private double heightInMetres;
-	private double capacityInkg;
+	
 	
 	private List<MaterialType> materialTypes;
 
