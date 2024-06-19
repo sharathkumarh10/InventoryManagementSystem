@@ -1,5 +1,6 @@
 package com.jsp.warehousemanagement.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.jsp.warehousemanagement.enums.MaterialType;
@@ -12,31 +13,31 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
-@Entity
-@Getter
 @Setter
-public class Storage {
+@Getter
+@Entity
+public class Inventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int storageId;
-	private String blockName;
-	private String section;
-	private double maxAdditionalWeightInKg;
-	private double availableAreaInMetre;
+	private int productId;
+	private String productTitle;
+	private double lengthInMetres;
+	private double breadthInMetres;
+	private double heightInMetres;
+	private double weightInKg;
+	private int quantity;
 	@Enumerated(EnumType.STRING)
 	List<MaterialType>materialType;
+	private LocalDate restockedAt;
 	private int sellerId;
 	
+	@ManyToMany(mappedBy = "inventories")
+	private List<Storage> storages;
+//	
 	@ManyToOne
-	private WareHouse wareHouse;
+	
+	private Client client; 
 
-	@ManyToOne
-	private StorageType storageTypes;
-	@ManyToMany
-	private List<Inventory>inventories;
-	
-	
 }
