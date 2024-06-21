@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 @Setter
@@ -27,17 +28,22 @@ public class Inventory {
 	private double breadthInMetres;
 	private double heightInMetres;
 	private double weightInKg;
-	private int quantity;
+
 	@Enumerated(EnumType.STRING)
 	List<MaterialType>materialType;
 	private LocalDate restockedAt;
 	private int sellerId;
 	
-	@ManyToMany(mappedBy = "inventories")
-	private List<Storage> storages;
+
 //	
 	@ManyToOne
 	
-	private Client client; 
+	private Client client;
+	
+	@OneToMany(mappedBy = "inventory")
+	private List<Stock> stock;
+	
+	@ManyToMany(mappedBy = "inventories")
+	List<PurchaseOrder> purchaseOrders;
 
 }
