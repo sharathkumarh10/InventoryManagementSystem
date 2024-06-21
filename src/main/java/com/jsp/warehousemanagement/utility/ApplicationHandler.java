@@ -26,10 +26,7 @@ public class ApplicationHandler {
 				new ErrorStructure().setStatusCode(status.value()).setErrorMessage(message).setRootCause(rootCause));
 	}
 
-	@ExceptionHandler
-	public ResponseEntity<ErrorStructure<String>> illegalOperationException(IllegalOperationException exception) {
-		return errorResponse(HttpStatus.FORBIDDEN, exception.getMessage(), "Only one super_admin is allowed");
-	}
+
 
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler
@@ -69,22 +66,11 @@ public class ApplicationHandler {
 						.setErrorMessage("Invalid Value").setRootCause(errorList));
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	@ExceptionHandler
-//	public ResponseEntity<ErrorStructure<Map<String, String>>> AdminNotFindByEmailException(AdminNotFindByEmailException exception) {
-//		List<ObjectError> allErrors = ((Errors) exception).getAllErrors();
-//
-//		Map<String, String> errorList = new HashMap<>();
-//		allErrors.forEach(error -> {
-//			FieldError fieldError = (FieldError) error;
-//			String field = fieldError.getField();
-//			String defaultMessage = fieldError.getDefaultMessage();
-//			errorList.put(field, defaultMessage);
-//		});
-//
-//		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//				.body(new ErrorStructure().setStatusCode(HttpStatus.BAD_REQUEST.value())
-//						.setErrorMessage("Invalid Value").setRootCause(errorList));
-//	}
-
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure<String>> illegalOperationException(IllegalOperationException exception) {
+		return errorResponse(HttpStatus.FORBIDDEN, exception.getMessage(), "Only one super_admin is allowed");
+	}
+	
 }
+
+

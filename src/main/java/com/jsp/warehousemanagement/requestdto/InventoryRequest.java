@@ -18,7 +18,6 @@ public class InventoryRequest {
 	private double breadthInMetres;
 	private double heightInMetres;
 	private double weightInKg;
-	private int quantity;
 	
 	List<MaterialType>materialType;
 	

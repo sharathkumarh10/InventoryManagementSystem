@@ -1,3 +1,4 @@
+
 package com.jsp.warehousemanagement.responsedto;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class StorageResponse {
 	private int storageId;
 	private String blockName;
 	private String section;
-	private double capacityInKg;
+	
 	
 	
 	List<MaterialType> materialTypes;

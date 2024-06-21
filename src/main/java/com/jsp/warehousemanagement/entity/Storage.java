@@ -35,8 +35,10 @@ public class Storage {
 
 	@ManyToOne
 	private StorageType storageTypes;
-	@ManyToMany
-	private List<Inventory>inventories;
+	
+	@OneToMany(mappedBy = "storage")
+	private List<Stock> stock;
+
 	
 	
 }

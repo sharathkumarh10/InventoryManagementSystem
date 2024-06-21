@@ -21,10 +21,12 @@ public class InventoryResponse {
 	private double breadthInMetres;
 	private double heightInMetres;
 	private double weightInKg;
-	private int quantity;
+	
 	
 	List<MaterialType>materialType;
 	private LocalDate restockedAt;
 	private int sellerId;
+	
+	private StockResponse stock;
 
 }
