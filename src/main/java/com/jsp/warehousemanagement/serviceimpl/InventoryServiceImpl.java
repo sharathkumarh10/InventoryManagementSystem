@@ -153,15 +153,18 @@ public class InventoryServiceImpl implements InventoryService{
 				 
 
 				   double newWeight = updatedInventory.getWeightInKg() * oldQuantity;
-				   double newArea = updatedInventory.getBreadthInMetres() * updatedInventory.getHeightInMetres() * updatedInventory.getLengthInMetres();
+				   double newArea = updatedInventory.getBreadthInMetres() * updatedInventory.getHeightInMetres() 
+						   * updatedInventory.getLengthInMetres();
 				   
-				  if((oldLength != updatedInventory.getLengthInMetres() || oldBreadth != updatedInventory.getBreadthInMetres() || oldHeight != updatedInventory.getHeightInMetres())
+				  if((oldLength != updatedInventory.getLengthInMetres() || oldBreadth != updatedInventory.getBreadthInMetres() 
+						  || oldHeight != updatedInventory.getHeightInMetres())
 						  || originalWeight != newWeight)
 						  {
 									if(storage.getAvailableAreaInMetre()>0 && storage.getMaxAdditionalWeightInKg() >0)
 									{
 										
-										storage.setMaxAdditionalWeightInKg(storage.getMaxAdditionalWeightInKg() + originalWeight - newWeight);
+										storage.setMaxAdditionalWeightInKg
+										(storage.getMaxAdditionalWeightInKg() + originalWeight - newWeight);
 								        storage.setAvailableAreaInMetre(storage.getAvailableAreaInMetre() + originalArea - newArea);  
 									}
 									
