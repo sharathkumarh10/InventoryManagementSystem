@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.jsp.warehousemanagement.exception.IllegalOperationException;
+import com.jsp.warehousemanagement.exception.OutOfStockException;
 import com.jsp.warehousemanagement.exception.WarehouseNotFoundByIdException;
 
 @RestControllerAdvice
@@ -69,6 +70,11 @@ public class ApplicationHandler {
 	@ExceptionHandler
 	public ResponseEntity<ErrorStructure<String>> illegalOperationException(IllegalOperationException exception) {
 		return errorResponse(HttpStatus.FORBIDDEN, exception.getMessage(), "Only one super_admin is allowed");
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure<String>> outOfStockException(OutOfStockException exception) {
+		return errorResponse(HttpStatus.FORBIDDEN, exception.getMessage(), "product is out of stock");
 	}
 	
 }
